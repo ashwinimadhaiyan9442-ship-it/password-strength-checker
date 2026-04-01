@@ -55,14 +55,31 @@ function login() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
 
+ function login() {
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
   if (username === "" || password === "") {
     alert("Enter all details ❌");
     return;
   }
 
-  // Save login status
-  localStorage.setItem("loggedIn", "true");
-  localStorage.setItem("user", username);
+  // Check fixed credentials
+  if (username === "admin" && password === "12341234") {
+
+    // Save login status
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("user", username);
+
+    alert("Login Successful ✅");
+
+    // Redirect
+    window.location.href = "home.html";
+
+  } else {
+    alert("Invalid Username or Password ❌");
+  }
+}
 
   // Redirect to next page
   window.location.href = "home.html";
