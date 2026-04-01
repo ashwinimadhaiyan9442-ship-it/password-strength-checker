@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Password + Login</title>
+  <title>Login</title>
   <style>
     body {
       font-family: Arial;
       text-align: center;
-      background: #f4f4f4;
+      background: #141e30;
+      color: white;
+      padding-top: 100px;
     }
 
     .box {
-      background: white;
-      padding: 20px;
-      margin: 100px auto;
+      background: #1e2a38;
+      padding: 25px;
       width: 300px;
+      margin: auto;
       border-radius: 10px;
     }
 
@@ -21,20 +23,18 @@
       width: 90%;
       padding: 10px;
       margin-top: 10px;
+      border: none;
+      border-radius: 5px;
     }
 
     button {
-      margin-top: 10px;
+      margin-top: 15px;
       padding: 10px;
       width: 95%;
       cursor: pointer;
-      background: #333;
-      color: white;
+      background: #00c6ff;
       border: none;
-    }
-
-    #strength {
-      margin-top: 10px;
+      color: black;
       font-weight: bold;
     }
   </style>
@@ -42,68 +42,33 @@
 <body>
 
 <div class="box">
-  <h2>🔐 Secure Login</h2>
+  <h2>🔐 Login</h2>
 
   <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Enter password" onkeyup="checkStrength()">
-
-  <div id="strength"></div>
+  <input type="password" id="password" placeholder="Password">
 
   <button onclick="login()">Login</button>
 </div>
 
 <script>
-let isStrong = false;
-
-function checkStrength() {
-  let pass = document.getElementById("password").value;
-  let strengthText = document.getElementById("strength");
-
-  let strength = 0;
-
-  if (pass.length >= 6) strength++;
-  if (/[A-Z]/.test(pass)) strength++;
-  if (/[0-9]/.test(pass)) strength++;
-  if (/[@$!%*?&]/.test(pass)) strength++;
-
-  if (pass.length === 0) {
-    strengthText.innerText = "";
-    isStrong = false;
-  } else if (strength <= 1) {
-    strengthText.innerText = "Weak ❌";
-    strengthText.style.color = "red";
-    isStrong = false;
-  } else if (strength == 2 || strength == 3) {
-    strengthText.innerText = "Medium ⚠️";
-    strengthText.style.color = "orange";
-    isStrong = false;
-  } else {
-    strengthText.innerText = "Strong ✅";
-    strengthText.style.color = "green";
-    isStrong = true;
-  }
-}
-
 function login() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
 
   if (username === "" || password === "") {
-    alert("Fill all fields!");
+    alert("Enter all details ❌");
     return;
   }
 
-  if (!isStrong) {
-    alert("Password not strong enough ❌");
-    return;
-  }
+  // Save login status
+  localStorage.setItem("loggedIn", "true");
+  localStorage.setItem("user", username);
 
-  alert("Login Successful 🎉");
-
-  // redirect to shopping page (example)
-  window.location.href = "shop.html";
+  // Redirect to next page
+  window.location.href = "home.html";
 }
 </script>
 
 </body>
 </html>
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f4f4f4;
+      padding-top: 100px;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="welcome"></h1>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+// Check login
+let isLoggedIn = localStorage.getItem("loggedIn");
+
+if (isLoggedIn !== "true") {
+  window.location.href = "index.html";
+}
+
+// Show username
+let user = localStorage.getItem("user");
+document.getElementById("welcome").innerText = "Welcome " + user + " 👋";
+
+// Logout
+function logout() {
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("user");
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
