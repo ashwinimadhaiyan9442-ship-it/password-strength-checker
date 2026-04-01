@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Password Strength Checker</title>
+  <title>Password + Login</title>
   <style>
     body {
       font-family: Arial;
@@ -23,8 +23,18 @@
       margin-top: 10px;
     }
 
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      width: 95%;
+      cursor: pointer;
+      background: #333;
+      color: white;
+      border: none;
+    }
+
     #strength {
-      margin-top: 15px;
+      margin-top: 10px;
       font-weight: bold;
     }
   </style>
@@ -32,14 +42,19 @@
 <body>
 
 <div class="box">
-  <h2>🔐 Password Strength Checker</h2>
+  <h2>🔐 Secure Login</h2>
 
+  <input type="text" id="username" placeholder="Username">
   <input type="password" id="password" placeholder="Enter password" onkeyup="checkStrength()">
 
   <div id="strength"></div>
+
+  <button onclick="login()">Login</button>
 </div>
 
 <script>
+let isStrong = false;
+
 function checkStrength() {
   let pass = document.getElementById("password").value;
   let strengthText = document.getElementById("strength");
@@ -53,16 +68,40 @@ function checkStrength() {
 
   if (pass.length === 0) {
     strengthText.innerText = "";
+    isStrong = false;
   } else if (strength <= 1) {
     strengthText.innerText = "Weak ❌";
     strengthText.style.color = "red";
+    isStrong = false;
   } else if (strength == 2 || strength == 3) {
     strengthText.innerText = "Medium ⚠️";
     strengthText.style.color = "orange";
+    isStrong = false;
   } else {
     strengthText.innerText = "Strong ✅";
     strengthText.style.color = "green";
+    isStrong = true;
   }
+}
+
+function login() {
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
+  if (username === "" || password === "") {
+    alert("Fill all fields!");
+    return;
+  }
+
+  if (!isStrong) {
+    alert("Password not strong enough ❌");
+    return;
+  }
+
+  alert("Login Successful 🎉");
+
+  // redirect to shopping page (example)
+  window.location.href = "shop.html";
 }
 </script>
 
